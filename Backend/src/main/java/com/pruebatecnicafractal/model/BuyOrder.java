@@ -2,25 +2,28 @@ package com.pruebatecnicafractal.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BuyOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private boolean active;
+    private Long buyOrderId;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    private Integer numberOfProducts;
+    private Double finalPrice;
 
-    private Integer quantity;
-    private Double price;
+    @OneToMany(mappedBy = "buyOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<BuyOrderXProduct> buyOrdersProduct;
 }

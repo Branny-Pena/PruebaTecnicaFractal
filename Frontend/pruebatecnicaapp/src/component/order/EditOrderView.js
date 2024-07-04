@@ -22,7 +22,7 @@ const EditOrderView = () => {
                     return true;
                 }
             });
-            if(result.status === 404) {
+            if (result.status === 404) {
                 navigate("/add-order");
             }
             setOrder(result.data);
@@ -70,10 +70,22 @@ const EditOrderView = () => {
         }
     };
 
+    const removeProductFromOrder = (index) => {
+        const updatedOrder = { ...order };
+        updatedOrder.buyOrdersProduct.splice(index, 1);
+        setOrder(updatedOrder);
+    };
+
     const saveOrder = async () => {
+        console.log(order);
         try {
+            const updatedOrder = {
+                ...order,
+                numberOfProducts: order.buyOrdersProduct.reduce((acc, item) => acc + item.quantity, 0),
+                finalPrice: order.buyOrdersProduct.reduce((acc, item) => acc + item.price, 0)
+            };
             await axios.put(`http://localhost:8000/buyOrders/${id}`, order);
-            navigate(`/order/${id}`);
+            navigate(`/add-order/${id}`);
         } catch (error) {
             console.error("Error saving order:", error);
             setError("Error saving order. Please try again later.");
@@ -113,6 +125,13 @@ const EditOrderView = () => {
                     className="form-control mt-2"
                     placeholder="Quantity"
                 />
+                <input
+                    type="text"
+                    value={selectedProduct.product ? selectedProduct.product.price : ""}
+                    disabled
+                    className="form-control mt-2"
+                    placeholder="Price"
+                />
                 <button onClick={addProductToOrder} className="btn btn-success mt-2">Add Product</button>
             </div>
             {order.buyOrdersProduct && order.buyOrdersProduct.length > 0 ? (
@@ -125,6 +144,7 @@ const EditOrderView = () => {
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total Price</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,6 +156,9 @@ const EditOrderView = () => {
                                 <td>${item.product.price}</td>
                                 <td>{item.quantity}</td>
                                 <td>${item.price}</td>
+                                <td>
+                                    <button onClick={() => removeProductFromOrder(index)} className="btn btn-danger">Remove</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

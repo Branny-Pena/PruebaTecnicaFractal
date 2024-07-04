@@ -26,4 +26,6 @@ public class BuyOrder {
     @OneToMany(mappedBy = "buyOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<BuyOrderXProduct> buyOrdersProduct;
+
+    private boolean active;
 }

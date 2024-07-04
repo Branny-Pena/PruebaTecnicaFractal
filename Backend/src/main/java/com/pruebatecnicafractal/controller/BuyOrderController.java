@@ -33,4 +33,14 @@ public class BuyOrderController {
     public BuyOrder getOrderById(@PathVariable Long buyOrderId){
         return buyOrderService.getOrderById(buyOrderId);
     }
+
+    @PutMapping("/{buyOrderId}")
+    public BuyOrder updateOrder(@PathVariable Long buyOrderId, @RequestBody BuyOrderDTO buyOrderDTO){
+        return buyOrderService.updateOrder(buyOrderDTO, buyOrderId);
+    }
+
+    @DeleteMapping("/{buyOrderId}")
+    public void deleteOrder(@PathVariable Long buyOrderId){
+        buyOrderService.deleteOrder(buyOrderId);
+    }
 }

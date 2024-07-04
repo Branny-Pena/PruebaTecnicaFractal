@@ -70,6 +70,20 @@ public class BuyOrderService implements BuyOrderInterface {
 
         buyOrder.setDate(new Date());
 
+        Set<Long> updatedProductIds = new HashSet<>();
+        for (BuyOrderDTO.BuyOrderXProductDTO buyOrderXProductDTO : buyOrderDTO.getBuyOrdersProduct()) {
+            updatedProductIds.add(buyOrderXProductDTO.getProduct().getProduct_id());
+        }
+
+        Iterator<BuyOrderXProduct> iterator = buyOrder.getBuyOrdersProduct().iterator();
+        while (iterator.hasNext()) {
+            BuyOrderXProduct existingProduct = iterator.next();
+            if (!updatedProductIds.contains(existingProduct.getProduct().getProduct_id())) {
+                iterator.remove();
+                buyOrderXProductService.deleteOrderXProduct(existingProduct.getBuyOrderProduct_id());
+            }
+        }
+
         Set<BuyOrderXProduct> buyOrderXProducts = new HashSet<>();
         double finalPrice = 0.0;
         int numberOfProducts = 0;

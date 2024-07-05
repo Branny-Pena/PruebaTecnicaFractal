@@ -14,7 +14,7 @@ const AddBuyOrderView = () => {
 
     const loadProducts = async () => {
         try {
-            const result = await axios.get('http://3.81.170.205:8000/products', {
+            const result = await axios.get('http://3.81.170.205:8080/products', {
                 validateStatus: () => {
                     return true;
                 }
@@ -52,7 +52,7 @@ const AddBuyOrderView = () => {
         e.preventDefault();
         const buyOrder = { buyOrdersProduct: selectedProducts };
         try {
-            await axios.post("http://localhost:8000/buyOrders", buyOrder);
+            await axios.post("http://3.81.170.205:8080/buyOrders", buyOrder);
             navigate("/my-orders");
         } catch (error) {
             console.error("There was an error saving the buy order!", error);

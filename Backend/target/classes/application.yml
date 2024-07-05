@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8080
 
 spring:
   datasource:
@@ -10,10 +10,10 @@ spring:
     hikari:
       minimum-idle: 5
       maximum-pool-size: 10
-      idle-timeout: 30000
-      max-lifetime: 1800000
-      connection-timeout: 20000
-      validation-timeout: 5000
+      idle-timeout: 3600000 # 1 hora (3600000 milisegundos)
+      max-lifetime: 3600000 # 1 hora (3600000 milisegundos)
+      connection-timeout: 30000 # 30 segundos (30000 milisegundos)
+      validation-timeout: 5000 # 5 segundos (5000 milisegundos)
   jpa:
     show-sql: true
     hibernate:

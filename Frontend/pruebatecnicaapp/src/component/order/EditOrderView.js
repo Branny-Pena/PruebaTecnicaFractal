@@ -17,7 +17,7 @@ const EditOrderView = () => {
 
     const loadOrder = async () => {
         try {
-            const result = await axios.get(`http://3.81.170.205:8000/buyOrders/${id}`, {
+            const result = await axios.get(`http://3.81.170.205:8080/buyOrders/${id}`, {
                 validateStatus: () => {
                     return true;
                 }
@@ -34,7 +34,7 @@ const EditOrderView = () => {
 
     const loadProducts = async () => {
         try {
-            const result = await axios.get('http://localhost:8000/products', {
+            const result = await axios.get('http://3.81.170.205:8080/products', {
                 validateStatus: () => {
                     return true;
                 }
@@ -84,7 +84,7 @@ const EditOrderView = () => {
                 numberOfProducts: order.buyOrdersProduct.reduce((acc, item) => acc + item.quantity, 0),
                 finalPrice: order.buyOrdersProduct.reduce((acc, item) => acc + item.price, 0)
             };
-            await axios.put(`http://localhost:8000/buyOrders/${id}`, order);
+            await axios.put(`http://3.81.170.205:8080/buyOrders/${id}`, order);
             navigate(`/add-order/${id}`);
         } catch (error) {
             console.error("Error saving order:", error);

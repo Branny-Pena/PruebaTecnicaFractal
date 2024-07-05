@@ -23,7 +23,7 @@ const AddProductView = () => {
 
 	const saveProduct = async (e) => {
 		e.preventDefault();
-		await axios.post("http://3.81.170.205:8080/products", product);
+		await axios.post("http://3.219.110.232:8080/products", product);
 		navigate("/view-products");
 	};
 

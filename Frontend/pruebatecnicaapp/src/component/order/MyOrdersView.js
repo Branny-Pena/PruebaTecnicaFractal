@@ -12,7 +12,7 @@ const BuyOrderView = () => {
 
     const loadBuyOrders = async () => {
         try {
-            const result = await axios.get('http://3.81.170.205:8080/buyOrders', {
+            const result = await axios.get('http://3.219.110.232:8080/buyOrders', {
                 validateStatus: () => {
                     return true;
                 }

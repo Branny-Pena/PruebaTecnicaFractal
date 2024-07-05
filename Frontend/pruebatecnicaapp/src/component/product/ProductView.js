@@ -11,7 +11,7 @@ const ProductView = () => {
 
     const loadProducts = async () => {
         try {
-            const result = await axios.get('http://localhost:8000/products', {
+            const result = await axios.get('http://3.81.170.205:8000/products', {
                 validateStatus: () => {
                     return true;
                 }

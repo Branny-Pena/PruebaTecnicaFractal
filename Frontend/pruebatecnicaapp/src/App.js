@@ -9,7 +9,7 @@ import Home from './Home.js'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BuyOrderView from './component/order/MyOrdersView.js';
 import OrderDetailView from './component/order/OrderDetailView.js'
-import AddBuyOrderView from './component/order/AddBuyOrderView.js';
+import AddEditBuyOrderView from './component/order/AddBuyOrderView.js';
 import EditOrderView from './component/order/EditOrderView.js';
 
 
@@ -23,9 +23,8 @@ function App() {
           <Route exact path = '/view-products' element = {<ProductView />}></Route>
           <Route exact path = '/add-product' element = {<AddProductView />}></Route>
           <Route exact path = '/my-orders' element = {<BuyOrderView />}></Route>
-          <Route exact path = '/add-order/:id' element = {<OrderDetailView />}></Route>
-          <Route exact path = '/add-order' element = {<AddBuyOrderView />}></Route>
-          <Route exact path = '/edit-order/:id' element = {<EditOrderView />}></Route>
+          <Route exact path = '/add-order/:id' element = {<AddEditBuyOrderView />}></Route>
+          <Route exact path = '/add-order' element = {<AddEditBuyOrderView />}></Route>
         </Routes>
       </Router>
     </main>
